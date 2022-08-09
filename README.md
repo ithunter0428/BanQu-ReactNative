@@ -65,4 +65,10 @@ I developed this "BanQu-ReactNative" project by turning Figma Designs to React N
 	
 ## Not Implemented
 1.  City Selection
-2.  Voice Input Search
+	
+		I don't have Google Map API Key as I've no Google developer account.
+	
+3.  Voice Input Search
+	
+		As time limit, I didn't implement this function.
+	
