@@ -22,7 +22,7 @@ I developed this "BanQu-ReactNative" project by using React-Native.
 ##Your Requirements.
 1. Pixel Perfect Design
 2. Animation
-3. Show received broadcast messages
+3. Show received brocast messages
 4. Message Search
 5. Message Editing
 6. Fake API Invocation
@@ -40,6 +40,7 @@ I developed this "BanQu-ReactNative" project by using React-Native.
 3. React Native Navigation
 		By using "Stack.Navigator", I created 6 screens and then by using "navigate()" function, I integrated these screens.
 		I also communicated between screens by using "route.params" variable.
+	
 4. Invoke Fake API
 	
 		By using "axios", I invoked api asynchronously.
@@ -51,10 +52,11 @@ I developed this "BanQu-ReactNative" project by using React-Native.
 	
 6. Using Hook
 		By using "useState()" and "useEffect()" function, I store data as state which I get from API.
+	
 7. Message Search By Keyword and Tag
 	
 		By using Javascript "filter()" function, I filtered message data by keyword and tag.
-
+	
 ##Not Implemented
 1.  City Selection
 2.  Voice Input Search
