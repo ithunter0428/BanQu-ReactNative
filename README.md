@@ -19,7 +19,7 @@ I developed this "BanQu-ReactNative" project by using React-Native.
 3. Run command "yarn web" to run project on browser.
 4. Run command "yarn android" to run project on android.
 
-##Your Requirements.
+## Your Requirements.
 1. Pixel Perfect Design
 2. Animation
 3. Show received brocast messages
@@ -51,12 +51,13 @@ I developed this "BanQu-ReactNative" project by using React-Native.
 		Then By using "useSelector", I get the value of "userinfo" such as interested tags, username and etc.
 	
 6. Using Hook
+
 		By using "useState()" and "useEffect()" function, I store data as state which I get from API.
 	
 7. Message Search By Keyword and Tag
 	
 		By using Javascript "filter()" function, I filtered message data by keyword and tag.
 	
-##Not Implemented
+## Not Implemented
 1.  City Selection
 2.  Voice Input Search
