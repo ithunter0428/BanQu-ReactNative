@@ -1,1 +1,0 @@
-{"ast":null,"code":"import Profile from \"./profile\";\nexport default Profile;","map":{"version":3,"names":["Profile"],"sources":["E:/jsc/AwesomeProject/src/Pages/MainPage/profile/index.tsx"],"sourcesContent":["import Profile from \"./profile\"\r\n\r\nexport default Profile;"],"mappings":"AAAA,OAAOA,OAAP;AAEA,eAAeA,OAAf"},"metadata":{},"sourceType":"module"}

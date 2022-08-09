@@ -1,1 +1,0 @@
-{"ast":null,"code":"export var SET_USER_PROFILE = 'SET_USER_PROFILE';","map":{"version":3,"names":["SET_USER_PROFILE"],"sources":["E:/jsc/AwesomeProject/src/Redux/Actions/action.tsx"],"sourcesContent":["export const SET_USER_PROFILE:string = 'SET_USER_PROFILE'"],"mappings":"AAAA,OAAO,IAAMA,gBAAuB,GAAG,kBAAhC"},"metadata":{},"sourceType":"module"}

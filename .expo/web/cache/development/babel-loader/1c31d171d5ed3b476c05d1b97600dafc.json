@@ -1,1 +1,0 @@
-{"ast":null,"code":"import PostForm from \"./postForm\";\nexport default PostForm;","map":{"version":3,"names":["PostForm"],"sources":["E:/jsc/AwesomeProject/src/Pages/Post/PostForm/index.tsx"],"sourcesContent":["import PostForm from \"./postForm\"\r\n\r\nexport default PostForm;"],"mappings":"AAAA,OAAOA,QAAP;AAEA,eAAeA,QAAf"},"metadata":{},"sourceType":"module"}
