@@ -1,0 +1,1 @@
+{"ast":null,"code":"import Post from \"./post\";\nexport default Post;","map":{"version":3,"names":["Post"],"sources":["E:/Upwork/React Native/AwesomeProject/src/Pages/DashboardTransition/postList/post/index.tsx"],"sourcesContent":["import Post from \"./post\"\r\n\r\nexport default Post;"],"mappings":"AAAA,OAAOA,IAAP;AAEA,eAAeA,IAAf"},"metadata":{},"sourceType":"module"}

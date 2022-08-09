@@ -1,0 +1,1 @@
+{"ast":null,"code":"export default TAgList;","map":{"version":3,"names":["TAgList"],"sources":["E:/Upwork/React Native/AwesomeProject/src/Components/TagList/index.tsx"],"sourcesContent":["import TagList from \"./tagList\";\r\n\r\nexport default TAgList;"],"mappings":"AAEA,eAAeA,OAAf"},"metadata":{},"sourceType":"module"}

@@ -1,0 +1,1 @@
+{"ast":null,"code":"export default PostMessage;","map":{"version":3,"names":["PostMessage"],"sources":["E:/Upwork/React Native/AwesomeProject/src/Components/PostContent/index.tsx"],"sourcesContent":["import PostContent from \"./postContent\"\r\n\r\nexport default PostMessage;"],"mappings":"AAEA,eAAeA,WAAf"},"metadata":{},"sourceType":"module"}

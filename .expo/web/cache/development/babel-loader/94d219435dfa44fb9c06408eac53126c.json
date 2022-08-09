@@ -1,0 +1,1 @@
+{"ast":null,"code":"import Search from \"./search\";\nexport default Search;","map":{"version":3,"names":["Search"],"sources":["E:/jsc/AwesomeProject/src/Pages/MainPageTransition/search/index.tsx"],"sourcesContent":["import Search from \"./search\";\r\n\r\nexport default Search;"],"mappings":"AAAA,OAAOA,MAAP;AAEA,eAAeA,MAAf"},"metadata":{},"sourceType":"module"}

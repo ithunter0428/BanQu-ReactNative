@@ -1,0 +1,1 @@
+{"ast":null,"code":"import Tag from \"./tag\";\nexport default Tag;","map":{"version":3,"names":["Tag"],"sources":["E:/Upwork/React Native/AwesomeProject/src/Components/TagList/tag/index.tsx"],"sourcesContent":["import Tag from \"./tag\";\r\n\r\nexport default Tag;"],"mappings":"AAAA,OAAOA,GAAP;AAEA,eAAeA,GAAf"},"metadata":{},"sourceType":"module"}
