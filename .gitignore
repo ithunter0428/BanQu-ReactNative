@@ -105,3 +105,6 @@ dist
 
 # Add .expo directory
 .expo/
+
+# Add .expo shared
+.expo-shared
