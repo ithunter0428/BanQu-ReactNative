@@ -1,6 +1,6 @@
 # React-Native Project: 
 
-I developed this "BanQu-ReactNative" project by using React-Native.
+I developed this "BanQu-ReactNative" project by turning Figma Designs to React Native Web Pages.
 
 
 ## Prerequisites
@@ -11,6 +11,9 @@ I developed this "BanQu-ReactNative" project by using React-Native.
 
 -Web Browser (Chrome)
 
+-Android Studio
+
+-IOS
 
 ## Running
 
@@ -18,11 +21,12 @@ I developed this "BanQu-ReactNative" project by using React-Native.
 2. Run command "npm install" to download packages
 3. Run command "yarn web" to run project on browser.
 4. Run command "yarn android" to run project on android.
+5. Run command "yarn ios" to run project on IOS.
 
 ## Your Requirements.
 1. Pixel Perfect Design
 2. Animation
-3. Show received brocast messages
+3. Show received broadcast messages
 4. Message Search
 5. Message Editing
 6. Fake API Invocation
@@ -48,11 +52,12 @@ I developed this "BanQu-ReactNative" project by using React-Native.
 5. Data Flow using Redux
 	
 		I loaded "UserInfo" from API and I saved this data in "store".
-		Then By using "useSelector", I get the value of "userinfo" such as interested tags, username and etc.
+		I also created actions and reducers.
+		Then By using "useSelector", I get the value of "userinfo" in global store.
 	
 6. Using Hook
 
-		By using "useState()" and "useEffect()" function, I store data as state which I get from API.
+		By using "useState()" and "useEffect()" function, I store data which I get from API and use this as state.
 	
 7. Message Search By Keyword and Tag
 	
