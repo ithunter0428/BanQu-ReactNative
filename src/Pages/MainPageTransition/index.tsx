@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { View, ScrollView, StyleSheet, Animated, Image, Text, TouchableOpacity } from 'react-native'
 import axios from 'axios';
-import { useFonts } from 'expo-font';
+import * as Font from 'expo-font';
 import { BASE_URL } from '../../Constant'
 import { useRoute } from '@react-navigation/native';
 import { Feather, Entypo } from '@expo/vector-icons';
@@ -17,12 +17,22 @@ import { MockPosts } from '../../Constant';
 
 // MainPage Component
 const MainPageTransition: FunctionComponent = ({ navigation }) => {
-    // Load Font
-    const [loaded] = useFonts({
-        IBMPlex: require('../../../assets/fonts/IBMPlexSans-Text.ttf'),
-    });
+    
 
-    const [postList, setPostListData] = useState(MockPosts);
+    const [fontLoaded, setFontLoaded] = useState(false)
+    const loadFont = async() => {
+        await Font.loadAsync({
+          'IBMPlex': require('../../../assets/fonts/IBMPlexSans-Text.ttf'),
+        })
+        setFontLoaded(true);
+      }
+    
+      useEffect(() => {
+            Animated.timing(offset, { toValue: 0, duration: 1000 , useNativeDriver: true}).start();
+            loadFont();
+        })
+
+    const [postList, setPostListData] = useState([]);
     const [filteredPostList, setFilterPostList] = useState(postList);
     const [keyword, setKeyword] = useState('');
     const [tag, setTag] = useState('all');
@@ -40,7 +50,7 @@ const MainPageTransition: FunctionComponent = ({ navigation }) => {
 
     useEffect(() => {
         if (animflag == true) {
-            Animated.timing(offset, { toValue: 0, duration: 2000 }).start();
+            Animated.timing(offset, { toValue: 0, duration: 2000 , useNativeDriver: true}).start();
         }
         else {
             fadeOut();
@@ -76,6 +86,7 @@ const MainPageTransition: FunctionComponent = ({ navigation }) => {
         Animated.timing(fadeAnimation, {
           toValue: 0,
           duration: 2500
+          , useNativeDriver: true
         }).start(() => setAnimFlag(true));
       };
 
@@ -84,21 +95,21 @@ const MainPageTransition: FunctionComponent = ({ navigation }) => {
     return (
         <View style={{ flex: 1 }}>
             {route.params && route.params.transition && animflag == false? <Animated.View style={[{opacity: fadeAnimation }, styles.backComponent]}><BroadcastTransition /></Animated.View> : <></>}
-            <ScrollView style={styles.scrollView}>
-                <Profile/>
-                <Search onChangeKeyword={onChangeKeyword} />
-                <Tag onChangeTag={onChangeTag} onlyInterested={true} onlyAnimated={true} />
-                <PostList messages={filteredPostList} onlyAnimation={animflag} />
-            </ScrollView>
+            {fontLoaded ?
+                
+                <ScrollView style={styles.scrollView}>
+                    <Profile />
+                    <Search onChangeKeyword={onChangeKeyword} />
+                    <Tag onChangeTag={onChangeTag} onlyInterested={true} onlyAnimated={true} />
+                    <PostList messages={filteredPostList} onlyAnimation={animflag} />
+                </ScrollView> 
+                : <></>
+            }
             
             <Animated.View style={{ transform: [{translateY: offset}] }}>
-                <TouchableOpacity onPress={() => { navigation.navigate('editor') }} style={styles.footer}>
+                <TouchableOpacity onPress={() => { navigation.navigate('editor', {text: ''}) }} style={styles.footer}>
                     <Text style={styles.button}>
-                        <Feather
-                            name="plus"
-                            size={20}
-                            color="white"
-                        />
+                        +
                     </Text>
                 </TouchableOpacity>
             </Animated.View>
@@ -114,16 +125,16 @@ const styles = {
         borderRadius: 32,
         backgroundColor: '#FF7C24',
         color: '#FFFFFF',
-        float: 'right',
+        alignItems: 'flex-end',
         textAlign: 'center',
         alignSelf: 'center',
-        alignItems: 'center',
+        // alignItems: 'center',
         fontSize: 32,
     },
     scrollView: {
         backgroundColor: '#0D0C13', 
         padding: 21, 
-        fontFamily: 'IBMPlex'
+        // fontFamily: 'IBMPlex'
     },
 
     footer: {

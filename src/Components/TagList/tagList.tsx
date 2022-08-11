@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   tag_active: {
     backgroundColor: '#FFFFFF',
     color: '#000000',
-    fontWeight: 600,
+    // fontWeight: 600,
     borderRadius: 14,
     paddingLeft: 17,
     paddingRight: 17,
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   tag_normal: {
     backgroundColor: 'rgba(255,255,255,0.1)',
     color: '#FFFFFF',
-    fontWeight: 500,
+    // fontWeight: 500,
     borderRadius: 14,
     paddingLeft: 17,
     paddingRight: 17,

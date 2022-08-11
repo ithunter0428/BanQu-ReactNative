@@ -2,8 +2,10 @@ import React, { Component, useEffect, useState } from 'react';
 import { View, StyleSheet, Animated, Image, Text, TouchableOpacity } from 'react-native'
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
+import { useFonts } from 'expo-font';
 import { BASE_URL, MockUser } from '../../../Constant'
 import { SET_USER_PROFILE } from '../../../Redux/Actions/action';
+import * as Font from 'expo-font';
 
 export default function Profile({ navigation }) {
     
@@ -11,8 +13,20 @@ export default function Profile({ navigation }) {
     
     const dispatch = useDispatch()
 
+    // // Load Font
+    const [fontLoaded, setFontLoaded] = useState(false)
+    const loadFont = async () => {
+        await Font.loadAsync({
+            'IBMPlex': require('../../../../assets/fonts/IBMPlexSans-Text.ttf'),
+        })
+        setFontLoaded(true);
+
+    }
+
+  
+    
     const saveProfileToRedux = () => {
-        dispatch({type: SET_USER_PROFILE, data: profile})
+        dispatch({ type: SET_USER_PROFILE, data: profile })
     }
 
     
@@ -23,9 +37,12 @@ export default function Profile({ navigation }) {
 
     useEffect(() => {
         getProfile();
+        loadFont();
     }, [])
 
     return (
+        <View>
+        {fontLoaded ?
         <View style={styles.container}>
             <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
                 <View>
@@ -41,8 +58,9 @@ export default function Profile({ navigation }) {
                         <Image style={styles.icon} source={require('../../../../assets/email.png')} />
                     </View>
                 </TouchableOpacity>
-            </View>
-        </View>
+                </View>
+        </View>: <></>}
+    </View>
     )
 }
 
@@ -87,8 +105,8 @@ const styles = StyleSheet.create({
     username: {
         marginLeft: 16,
         fontSize: 20,
-        fontWeight: 700,
-        fontFamily: 'IBMPlex',
+        //fontWeight: 700,
+        // fontFamily: 'IBMPlex',
         alignSelf: 'center',
         color: '#F5F5F5'
     }

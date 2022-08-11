@@ -12,10 +12,11 @@ const BroadcastScreen: FunctionComponent = ({ navigation }) => {
 
     const onFadePost = () => {
         // setfadeOut(true)
-        navigation.navigate('DashboardTrans', route.params)
+        // navigation.navigate('DashboardTrans', route.params)
         Animated.timing(fadeAnimation, {
             toValue: 0,
             duration: 800,
+            useNativeDriver: true
         }).start();
     }
 

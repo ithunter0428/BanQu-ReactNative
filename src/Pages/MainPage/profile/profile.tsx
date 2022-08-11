@@ -4,17 +4,27 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { BASE_URL, MockUser } from '../../../Constant'
 import { SET_USER_PROFILE } from '../../../Redux/Actions/action';
+import * as Font from 'expo-font';
 
 export default function Profile({ navigation }) {
     
     const [profile, setProfile] = useState({})
     const dispatch = useDispatch()
+    // Load Font
+
+
+    const [fontLoaded, setFontLoaded] = useState(false)
+    const loadAssetsAsync = async () => {
+        await Font.loadAsync({
+            'IBMPlex': require('../../../../assets/fonts/IBMPlexSans-Text.ttf'),
+        })
+        setFontLoaded(true);
+      }
 
     const saveProfileToRedux = (data) => {
         dispatch({type: SET_USER_PROFILE, data: data})
     }
 
-    // saveProfileToRedux();
     const getProfile = async () => {
         const { data } = await axios.get(BASE_URL + "/getUserInfo")
         setProfile(data)
@@ -23,25 +33,30 @@ export default function Profile({ navigation }) {
 
     useEffect(() => {
         getProfile();
+        loadAssetsAsync();
+
     }, [])
 
     return (
-        <View style={styles.container}>
-            <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
-                <View>
-                    <Image style={styles.photo} source = {{uri: profile.profile_img}} />
-                    <Image style={styles.badge} source={require('../../../../assets/badge.png')} />
-                </View>
-                <Text style={styles.username}>{profile.username}</Text>
-            </View>
-
-            <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                <TouchableOpacity>
-                    <View style={styles.rect}>
-                        <Image style={styles.icon} source={require('../../../../assets/email.png')} />
+        <View>
+            {fontLoaded ?
+            <View style={styles.container}>
+                <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
+                    <View>
+                        <Image style={styles.photo} source = {{uri: profile.profile_img}} />
+                        <Image style={styles.badge} source={require('../../../../assets/badge.png')} />
                     </View>
-                </TouchableOpacity>
-            </View>
+                    <Text style={styles.username}>{profile.username}</Text>
+                </View>
+
+                <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                    <TouchableOpacity>
+                        <View style={styles.rect}>
+                            <Image style={styles.icon} source={require('../../../../assets/email.png')} />
+                        </View>
+                    </TouchableOpacity>
+                    </View>
+            </View>: <></>}
         </View>
     )
 }
@@ -84,8 +99,8 @@ const styles = StyleSheet.create({
     username: {
         marginLeft: 16,
         fontSize: 20,
-        fontWeight: 700,
-        fontFamily: 'IBMPlex',
+        fontWeight: 'bold',
+        // fontFamily: 'IBMPlex',
         alignSelf: 'center',
         color: '#F5F5F5'
     }

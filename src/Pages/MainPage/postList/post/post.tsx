@@ -1,56 +1,67 @@
 import React, { Component, useEffect, useState } from 'react';
-import { View, StyleSheet, Animated, Image, Text } from 'react-native';
+import { View, StyleSheet, Animated, Image, Text, TouchableHighlight } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { deg } from 'react-native-linear-gradient-degree';
+import * as Font from 'expo-font';
 
 export default function Post({backColor, message, index}) {
     
     const [offset, setOffset] = useState(new Animated.Value(-250 + index * 30))
+    const [fontLoaded, setFontLoaded] = useState(false)
+    const loadAssetsAsync = async () => {
+        await Font.loadAsync({
+            'IBMPlex': require('../../../../../assets/fonts/IBMPlexSans-Text.ttf'),
+        })
+        setFontLoaded(true);
+    }
 
     useEffect(() => {
-        Animated.timing(offset, { toValue: 0, duration: (250 - index * 30) * 3.5 }).start();
+        Animated.timing(offset, { toValue: 0, duration: (250 - index * 30) * 3.5, useNativeDriver: true }).start();
+        loadAssetsAsync();
+        
     })
 
     return (
-        <Animated.View style={{ transform: [{translateX: offset}] }}>
-        <View style={{
-        // background: "linear-gradient(#FF9457, #E96114)",
-        background: backColor,
-        borderRadius: 12,
-        padding: 20,
-        paddingTop: 0,
-        marginBottom: 14,
-        color: '#FFFFFF'
-    }}>
-        <View style={styles.footer}>
-            <View style={{ flexDirection: 'row', justifyContent:'flex-start' }}>
-                <Image style={styles.photo} source = {{uri: message.profile_img}}></Image>
-                <Text style={styles.username}>{message.sender_name}</Text>
-            </View>
+    
+        <Animated.View style={{ transform: [{ translateX: offset }] }}>
+            {fontLoaded ?
+                <LinearGradient colors={backColor} {...deg(111.39)} style={{ borderRadius: 12, marginBottom: 16 }}>
 
-            <View style={{ flexDirection: 'row', justifyContent:'flex-end' }}>
-                <Text style={styles.category}>{message.tag}</Text>
-            </View>
-        </View>
+                    <View style={styles.box}>
+                        
+                        <View style={styles.footer}>
+                            <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
+                                <Image style={styles.photo} source={{ uri: message.profile_img }}></Image>
+                                <Text style={styles.username}>{message.sender_name}</Text>
+                            </View>
 
-        <View style={styles.footer}>
-            <Text style={styles.content}>{message.content}</Text>
-        </View>
+                            <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                                <Text style={styles.category}>{message.tag}</Text>
+                            </View>
+                        </View>
 
-        <View style={styles.footer}>
-            <View style={{ flexDirection: 'row', justifyContent:'flex-start' }}>
-                <Image style={styles.icon} source={require('../../../../../assets/Vector.png')}></Image>
-                <Image style={styles.icon} source={require('../../../../../assets/Combined-Shape.png')}></Image>
-                <Image style={styles.icon} source={require('../../../../../assets/send.png')}></Image>
-            </View>
+                        <View style={styles.footer}>
+                            <Text style={styles.content}>{message.content}</Text>
+                        </View>
 
-            <View style={{ flexDirection: 'row', justifyContent:'flex-end' }}>
-                <Text style={styles.text}>{message.comments} Comments</Text>
-                <Image style={styles.dot} source={require('../../../../../assets/Ellipse.png')}></Image>
-                <Text style={styles.text}>{message.likes} likes</Text>
-            </View>
-        </View>
+                        <View style={styles.footer}>
+                            <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
+                                <Image style={styles.icon} source={require('../../../../../assets/Vector.png')}></Image>
+                                <Image style={styles.icon} source={require('../../../../../assets/Combined-Shape.png')}></Image>
+                                <Image style={styles.icon} source={require('../../../../../assets/send.png')}></Image>
+                            </View>
 
-        </View>
-    </Animated.View>
+                            <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                                <Text style={styles.text}>{message.comments} Comments</Text>
+                                <Image style={styles.dot} source={require('../../../../../assets/Ellipse.png')}></Image>
+                                <Text style={styles.text}>{message.likes} likes</Text>
+                            </View>
+                        </View>
+
+                    </View>
+                </LinearGradient> : <></>
+            }
+        </Animated.View>
     )
 
 }
@@ -64,13 +75,20 @@ const styles = StyleSheet.create({
     },
 
     username: {
-        fontWeight: 500,
+        //fontWeight: 500,
         fontSize: 14,
-        fontFamiliy: 'IBMPlex',
+        // fontFamily: 'IBMPlex',
         lineHeight: 18,
         marginLeft: 10,
         alignSelf: 'center',
         color: '#FFFFFF'
+    },
+
+    box: {
+        borderRadius: 12,
+        padding: 20,
+        paddingTop: 0,
+        // color: '#FFFFFF',
     },
 
     category: {
@@ -80,7 +98,7 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         borderWidth: 1,
         borderRadius: 12,
-        fontWeight: 500,
+        //fontWeight: 500,
         fontSize: 14,
         paddingLeft: 8,
         paddingRight: 8,
@@ -88,14 +106,14 @@ const styles = StyleSheet.create({
     },
 
     content: {
-        fontWeight: 600,
+        //fontWeight: 600,
         fontSize: 17,
         lineHeight: 22.1,
         color: '#FFFFFF'
     },
 
     icon: {
-        width: 17,
+        width: 19,
         height: 17,
         marginRight: 18.3,
     },
@@ -107,9 +125,9 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        fontWeight: 500,
+        //fontWeight: 500,
         fontSize: 12,
-        fontFamiliy: 'IBMPlex',
+        // fontFamily: 'IBMPlex',
         color: '#FFFFFF'
     },
 

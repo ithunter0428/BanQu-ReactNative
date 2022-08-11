@@ -1,8 +1,9 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { View, ScrollView, StyleSheet, Animated, Image, Text, TouchableOpacity } from 'react-native'
 import axios from 'axios';
-import { useFonts } from 'expo-font';
-import { BASE_URL } from '../../Constant'
+import * as Font from 'expo-font';
+// import { useFonts } from 'expo-font';
+import { BASE_URL, MockPosts } from '../../Constant'
 import { useRoute } from '@react-navigation/native';
 import { Feather, Entypo } from '@expo/vector-icons';
 import Profile from "./profile";
@@ -16,9 +17,20 @@ import BroadcastTransition from '../BroadcastTransition'
 
 const MainPage: FunctionComponent = ({ navigation }) => {
     // Load Font
-    const [loaded] = useFonts({
-        IBMPlex: require('../../../assets/fonts/IBMPlexSans-Text.ttf'),
-      });
+    const [fontLoaded, setFontLoaded] = useState(false)
+    const loadAssetsAsync = async () => {
+        // await Font.loadAsync({
+        //     "IBM Plex Sans Text": require('../../assets/fonts/IBMPlexSans-Text.ttf'),
+        // })
+        setFontLoaded(true);
+    }
+  
+    
+    useEffect(() => {
+        Animated.timing(offset, { toValue: 0, duration: 1000, useNativeDriver: true }).start();
+        loadAssetsAsync()
+        //loadFont();
+    })
 
     // State Variables
     const [postList, setPostListData] = useState([]);
@@ -39,7 +51,7 @@ const MainPage: FunctionComponent = ({ navigation }) => {
 
     // 
     useEffect(() => {
-        Animated.timing(offset, { toValue: 0, duration: 2000 }).start();
+        Animated.timing(offset, { toValue: 0, duration: 2000 , useNativeDriver: true}).start();
         getPostList()
     }, [route])
 
@@ -76,6 +88,7 @@ const MainPage: FunctionComponent = ({ navigation }) => {
         Animated.timing(fadeAnimation, {
           toValue: 0,
           duration: 2500
+          , useNativeDriver: true
         }).start(() => setAnimFlag(false));
       };
 
@@ -85,22 +98,21 @@ const MainPage: FunctionComponent = ({ navigation }) => {
         <View style={{ flex: 1 }}>
 
             {/* Scroll View */}
-            <ScrollView style={{ backgroundColor: '#0D0C13', padding: 21, fontFamily: 'IBMPlex' }}>
-                <Profile/>
-                <Search onChangeKeyword={onChangeKeyword} />
-                <Tag onChangeTag={onChangeTag} onlyInterested={true} onlyAnimated={true} />
-                <PostList messages={filteredPostList} />
-            </ScrollView>
+            {fontLoaded ?
+                <ScrollView style={{ backgroundColor: '#0D0C13', padding: 21}}>
+                    <Profile />
+                    <Search onChangeKeyword={onChangeKeyword} />
+                    <Tag onChangeTag={onChangeTag} onlyInterested={true} onlyAnimated={true} />
+                    <PostList messages={filteredPostList} />
+                </ScrollView>
+                : <></>
+            } 
             
             {/* Animation Button */}
             <Animated.View style={{ transform: [{translateY: offset}] }}>
-                <TouchableOpacity onPress={() => { navigation.navigate('editor') }} style={styles.footer}>
+                <TouchableOpacity onPress={() => { navigation.navigate('editor', {text: ''}) }} style={styles.footer}>
                     <Text style={styles.button}>
-                        <Feather
-                            name="plus"
-                            size={20}
-                            color="white"
-                        />
+                        +
                     </Text>
                 </TouchableOpacity>
             </Animated.View>
@@ -116,10 +128,11 @@ const styles = {
         borderRadius: 32,
         backgroundColor: '#FF7C24',
         color: '#FFFFFF',
-        float: 'right',
+        // float: 'right',
+        alignItems: 'flex-end',
         textAlign: 'center',
         alignSelf: 'center',
-        alignItems: 'center',
+        // alignItems: 'center',
         fontSize: 32,
     },
     footer: {

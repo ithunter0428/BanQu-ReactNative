@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from 'react';
-import { View, StyleSheet, Image, Text, Button, TouchableOpacity, TextInput, Animated } from 'react-native'
+import { View, StyleSheet, Image, Text, Button, TouchableOpacity, TextInput, Animated, ScrollView } from 'react-native'
 import { useRoute } from '@react-navigation/native';
 import axios from 'axios'
 import { BASE_URL } from '../../../Constant';
@@ -18,7 +18,10 @@ export default function BroadcastForm({ navigation }) {
     const [offset4, setOffset4] = useState(new Animated.Value(15))
     const [offset5, setOffset5] = useState(new Animated.Value(15))
     // Send Post to API
+
     const broadcastPost = () => {
+
+
         axios.post(BASE_URL + "/sendPost", route.params)
             .then(function (response) {
                 if (response.data.code == 0)
@@ -32,51 +35,53 @@ export default function BroadcastForm({ navigation }) {
        const doAnimation = () => {
         setAnimType(!animType)
         setBorderColor(animType == false ? '#909090' : '#FFFFFF')
-        Animated.timing(offset1, { toValue: animType == true ? 0 : offsetArray[0], duration: 1500 }).start();
-        Animated.timing(offset2, { toValue: animType == true ? 0 : offsetArray[1], duration: 1500 }).start();
-        Animated.timing(offset3, { toValue: animType == true ? 0 : offsetArray[2], duration: 1500 }).start();
-        Animated.timing(offset4, { toValue: animType == true ? 0 : offsetArray[3], duration: 1500 }).start();
-        Animated.timing(offset5, { toValue: animType == true ? 0 : offsetArray[4], duration: 1500 }).start();
+        Animated.timing(offset1, { toValue: animType == true ? 0 : offsetArray[0], duration: 1500 , useNativeDriver: true}).start();
+        Animated.timing(offset2, { toValue: animType == true ? 0 : offsetArray[1], duration: 1500 , useNativeDriver: true}).start();
+        Animated.timing(offset3, { toValue: animType == true ? 0 : offsetArray[2], duration: 1500 , useNativeDriver: true}).start();
+        Animated.timing(offset4, { toValue: animType == true ? 0 : offsetArray[3], duration: 1500 , useNativeDriver: true}).start();
+        Animated.timing(offset5, { toValue: animType == true ? 0 : offsetArray[4], duration: 1500 , useNativeDriver: true}).start();
     }
 
     return (
         <View style={styles.container}>
             
+            <ScrollView>
             {/*  */}
-            <Animated.View style={{ transform: [{ translateY: offset1 }] }}>
-                <TouchableOpacity onPress={doAnimation}>
-                    <View style={[styles.border, {borderColor: borderColor}]}></View>
-                </TouchableOpacity>
-            </Animated.View>
+                <Animated.View style={{ transform: [{ translateY: offset1 }] }}>
+                    <TouchableOpacity onPress={doAnimation}>
+                        <View style={[styles.border, {borderColor: borderColor}]}></View>
+                    </TouchableOpacity>
+                </Animated.View>
 
-            {/* Broadcast Image */}
-            <Animated.View style={{ transform: [{ translateY: offset3 }] }}>
-                    <Image style={styles.img} source={require('../../../../assets/Frame.png')} />
-            </Animated.View>
+                {/* Broadcast Image */}
+                <Animated.View style={{ transform: [{ translateY: offset3 }] }}>
+                        <Image style={styles.img} source={require('../../../../assets/Frame.png')} />
+                </Animated.View>
 
-            {/* Description */}
-            <Animated.View style={{ transform: [{ translateY: offset4 }] }}>
-                <Text style={styles.text}>
-                    This message is going to be broadcasted out!
-                </Text>
-            </Animated.View>
-
-            {/* Buttons */}
-            <Animated.View style={{ transform: [{ translateY: offset5 }] }}>
-                <TouchableOpacity onPress={broadcastPost}>
-                    <Text style={styles.button}>
-                        Just do it!
+                {/* Description */}
+                <Animated.View style={{ transform: [{ translateY: offset4 }] }}>
+                    <Text style={styles.text}>
+                        This message is going to be broadcasted out!
                     </Text>
-                </TouchableOpacity>
-            </Animated.View>
+                </Animated.View>
 
-            <Animated.View style={{ transform: [{ translateY: offset2 }] }}>
-                <TouchableOpacity onPress={() => navigation.goBack()}>
-                    <Text style={styles.back_button}>
-                        Back
-                    </Text>
-                </TouchableOpacity>
-            </Animated.View>
+                {/* Buttons */}
+                <Animated.View style={{ transform: [{ translateY: offset5 }] }}>
+                    <TouchableOpacity onPress={broadcastPost}>
+                        <Text style={styles.button}>
+                            Just do it!
+                        </Text>
+                    </TouchableOpacity>
+                </Animated.View>
+
+                <Animated.View style={{ transform: [{ translateY: offset2 }] }}>
+                    <TouchableOpacity onPress={() => navigation.goBack()}>
+                        <Text style={styles.back_button}>
+                            Back
+                        </Text>
+                    </TouchableOpacity>
+                </Animated.View>
+            </ScrollView>
 
         </View>
     )
@@ -87,7 +92,7 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         // Left: 21,
         backgroundColor: '#212027',
-        // flex: 1,
+        flex: 1,
     },
 
     border: {
@@ -114,7 +119,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         // alignItems: 'stretch',
-        fontWeight: 500,
+        // fontWeight: '500',
         fontSize: 20,
         lineHeight: 26,
         textAlign: 'center',
@@ -129,7 +134,7 @@ const styles = StyleSheet.create({
         paddingTop: 18,
         marginBottom: 12,
         fontSize: 18,
-        fontWeight: 600,
+        // fontWeight: '600',
         color: '#FFFFFF',
         textAlign: 'center',
     },

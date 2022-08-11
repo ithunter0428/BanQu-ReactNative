@@ -7,15 +7,15 @@ import Geocoder from 'react-native-geocoding';
 export default function LocationForm({ navigation }) {
     const route = useRoute();
     useEffect(() => {
-        Geolocation.getCurrentPosition(
-            (position) => {
+        // Geolocation.getCurrentPosition(
+        //     (position) => {
 
-                Geocoder.init("AIzaSyBSWy092eLYdH8YjjhmlkC8F1s9oa3Hs2A");
-                Geocoder.from(position.coords.latitude, position.coords.longitude)
-                    .then(json => {
-                    })
-            }
-        )        
+        //         Geocoder.init("AIzaSyBSWy092eLYdH8YjjhmlkC8F1s9oa3Hs2A");
+        //         Geocoder.from(position.coords.latitude, position.coords.longitude)
+        //             .then(json => {
+        //             })
+        //     }
+        // )        
     })
 
     return (
@@ -23,7 +23,7 @@ export default function LocationForm({ navigation }) {
 
             <View style={styles.border}></View>
             <Text style={styles.label}>Pick Your Location</Text>
-            <TextInput style={styles.input}></TextInput>
+            <TextInput style={styles.input} selectionColor='#FF7C24'></TextInput>
             <View style={{ flexDirection: 'row', justifyContent:'flex-start' }}>
                 <Image style={styles.img} source={require('../../../../assets/location.png')} />
                 <Text style={styles.text}>Current Location</Text>
@@ -47,8 +47,8 @@ const styles = StyleSheet.create({
         height: 54,
         borderRadius: 12,
         color: '#FFFFFF',
-        selectionColor: '#FF7C24',
-        caretColor: '#FF7C24',
+        // selectionColor: '#FF7C24',
+        // caretColor: '#FF7C24',
         fontSize: 18,
         paddingLeft: 15,
     },
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        fontWeight: 500,
+        // fontWeight: '500',
         fontSize: 20,
         lineHeight: 26,
         marginLeft: 15.2,
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     },
 
     label: {
-        fontWeight: 500,
+        // fontWeight: 500,
         fontSize: 20,
         lineHeight: 26,
         marginTop: 25,

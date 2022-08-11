@@ -1,14 +1,16 @@
 import React, { Component, useEffect, useState } from 'react';
 import { View, StyleSheet, Animated, Image, Text } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { deg } from 'react-native-linear-gradient-degree';
 import Post from './post';
 
 export default function PostList({messages}) {
     
     const [backColorList, setBackColorList] = useState([
-        "linear-gradient(111.39deg, #FF9457 -7.95%, #E96114 64.07%)",
-        "linear-gradient(111.39deg, #FF8AEC -7.95%, #B114E9 64.07%)",
-        "linear-gradient(111.39deg, #CAC5C9 -7.95%, #918D90 64.07%)",
-        "linear-gradient(111.39deg, #8CB5F2 -7.95%, #2A8DE8 64.07%)"
+        ["#FF9457", "#E96114"],
+        ["#FF8AEC", "#B114E9"],
+        ["#CAC5C9", "#918D90"],
+        ["#8CB5F2", "#2A8DE8"]
     ]) 
 
     const postList = () => {
@@ -16,7 +18,7 @@ export default function PostList({messages}) {
         const data = Array.isArray(messages) == true ? messages : []
         return data.map((message, index) => {
             return (
-                <Post backColor={backColorList[index % 4]} message={message} index={index} key={index} />
+                    <Post backColor={backColorList[index % 4]} message={message} index={index} key={index} />
             )
         })
     }
@@ -37,7 +39,7 @@ const styles = StyleSheet.create({
     },
 
     username: {
-        fontWeight: 500,
+        // fontWeight: 500,
         fontSize: 14,
         lineHeight: 18,
         marginLeft: 10,
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         borderWidth: 1,
         borderRadius: 12,
-        fontWeight: 500,
+        // fontWeight: 500,
         fontSize: 14,
         paddingLeft: 8,
         paddingRight: 8,
@@ -59,7 +61,7 @@ const styles = StyleSheet.create({
     },
 
     content: {
-        fontWeight: 600,
+        // fontWeight: 600,
         fontSize: 17,
         lineHeight: 22.1,
         color: '#FFFFFF'
@@ -78,7 +80,7 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        fontWeight: 500,
+        // fontWeight: 500,
         fontSize: 12,
         color: '#FFFFFF'
     },

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, Text, Button, TouchableOpacity, Switch, Picker, Animated, ScrollView } from 'react-native';
+import { View, StyleSheet, Image, Text, Button, TouchableOpacity, Switch, Animated, ScrollView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { useEffect, useState } from 'react';
 import { useRoute } from '@react-navigation/native';
@@ -53,14 +53,14 @@ export default function PostForm({navigation}) {
     const doAnimation = () => {
         setAnimType(!animType)
         setBorderColor(animType == false ? '#909090' : '#FFFFFF')
-        Animated.timing(offset1, { toValue: animType == true ? 0 : offsetArray[0], duration: 1500 }).start();
-        Animated.timing(offset2, { toValue: animType == true ? 0 : offsetArray[1], duration: 1500 }).start();
-        Animated.timing(offset3, { toValue: animType == true ? 0 : offsetArray[2], duration: 1500 }).start();
-        Animated.timing(offset4, { toValue: animType == true ? 0 : offsetArray[3], duration: 1500 }).start();
-        Animated.timing(offset5, { toValue: animType == true ? 0 : offsetArray[4], duration: 1500 }).start();
-        Animated.timing(offset6, { toValue: animType == true ? 0 : offsetArray[5], duration: 1500 }).start();
-        Animated.timing(offset7, { toValue: animType == true ? 0 : offsetArray[6], duration: 1500 }).start();
-        Animated.timing(offset8, { toValue: animType == true ? 0 : offsetArray[7], duration: 1500 }).start();
+        Animated.timing(offset1, { toValue: animType == true ? 0 : offsetArray[0], duration: 1500 , useNativeDriver: true}).start();
+        Animated.timing(offset2, { toValue: animType == true ? 0 : offsetArray[1], duration: 1500 , useNativeDriver: true}).start();
+        Animated.timing(offset3, { toValue: animType == true ? 0 : offsetArray[2], duration: 1500 , useNativeDriver: true}).start();
+        Animated.timing(offset4, { toValue: animType == true ? 0 : offsetArray[3], duration: 1500 , useNativeDriver: true}).start();
+        Animated.timing(offset5, { toValue: animType == true ? 0 : offsetArray[4], duration: 1500 , useNativeDriver: true}).start();
+        Animated.timing(offset6, { toValue: animType == true ? 0 : offsetArray[5], duration: 1500 , useNativeDriver: true}).start();
+        Animated.timing(offset7, { toValue: animType == true ? 0 : offsetArray[6], duration: 1500 , useNativeDriver: true}).start();
+        Animated.timing(offset8, { toValue: animType == true ? 0 : offsetArray[7], duration: 1500 , useNativeDriver: true}).start();
     }
 
     return (
@@ -72,23 +72,31 @@ export default function PostForm({navigation}) {
                 </TouchableOpacity>
             </Animated.View>
             
-            {/* Location Label */}
+            {/* Label */}
             <Animated.View style={{ transform: [{ translateY: offset2 }] }}>
                 <Text style={styles.label} >Location</Text>
             </Animated.View>
 
+            {/* Picker for City */}
             <Animated.View style={{ transform: [{ translateY: offset3 }] }}>
                 <TouchableOpacity onPress={() => {navigation.navigate('location')}}>
-                    <Picker style={styles.input} itemStyle={{color: 'white'}}>
+                    {/* <Picker style={styles.input} itemStyle={{color: 'white'}} selectedValue={"Beijing"} onTouchStart={() => {navigation.navigate('location')}} >
                         <Picker.Item color="white" label="Beijing" value="bj" />
-                    </Picker>
+                    </Picker> */}
+                    <View style={[styles.input]}>
+                        <Text style={{ color: 'white', alignSelf: 'center', textAlign: 'center', flex: 1, flexDirection: 'row' }}>Beijing
+                            <Image source={require('../../../../assets/down.png')} style={{ width:24, height: 24}} />
+                        </Text>
+                    </View>
                 </TouchableOpacity>
             </Animated.View>
 
+            {/* Online Status Label*/}
             <Animated.View style={{ transform: [{ translateY: offset4 }] }}>
                 <Text style={styles.label}>Status</Text>
             </Animated.View>    
             
+            {/* Online Status Input */}
             <Animated.View style={{ transform: [{ translateY: offset5 }] }}>
                 <View style={styles.input}>
                     <Text style={{ color: 'white' }}>{online == true ? 'Online' : 'Offline'}</Text>
@@ -99,14 +107,17 @@ export default function PostForm({navigation}) {
                 </View>
             </Animated.View>
 
+            {/* Label */}
             <Animated.View style={{ transform: [{ translateY: offset6 }] }}>
                 <Text style={styles.label}>Interested</Text>
             </Animated.View>
 
+            {/* Tags */}
             <Animated.View style={{ transform: [{ translateY: offset7 }] }}>
                 <Tag onChangeTag={onChangeTag} onlyInterested={false} onlyAnimated={false} />
             </Animated.View>
             
+            {/* Buttons */}
             <Animated.View style={{ transform: [{ translateY: offset8 }] }}>
                 <TouchableOpacity onPress={toBroadCast}>
                     <Text style={styles.button}>
@@ -171,7 +182,7 @@ const styles = StyleSheet.create({
     category_active: {
         backgroundColor: '#FFFFFF',
         color: '#000000',
-        fontWeight: 600,
+        //fontWeight: 600,
         borderRadius: 14,
         paddingLeft: 17,
         paddingRight: 17,
@@ -182,7 +193,7 @@ const styles = StyleSheet.create({
       category_normal: {
         backgroundColor: 'rgba(255,255,255,0.1)',
         color: '#FFFFFF',
-        fontWeight: 500,
+        //fontWeight: 500,
         borderRadius: 14,
         paddingLeft: 17,
         paddingRight: 17,

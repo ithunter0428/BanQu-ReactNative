@@ -1,6 +1,8 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
 import { View, StyleSheet, Animated, Image, Text, Dimensions } from 'react-native';
 import { useRoute } from '@react-navigation/native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { deg } from 'react-native-linear-gradient-degree';
 import BroadcastForm from './BroadcastForm';
 
 
@@ -13,7 +15,8 @@ function PostContent({navigation, fadeOut}) {
     useEffect(() => {
         Animated.timing(scaleAnim, {
             toValue: 0.1,
-            duration: 2500
+            duration: 2500,
+            useNativeDriver: true
         }).start()
     })
     
@@ -40,24 +43,31 @@ function PostContent({navigation, fadeOut}) {
                 }
             ]
         }}>
-            <View style={{padding: 21, zIndex: 9999}}>
-                <Text style={{
-                    background: 'linear-gradient(111.39deg, #FF9457 -7.95%, #E96114 64.07%)',
-                    paddingRight: 21,
-                    paddingLeft: 21,
-                    paddingTop: 56,
-                    paddingBottom: 56,
-                    marginBottom: 27,
-                    borderRadius: 12,
-                    border: 'border: 1px solid rgba(255, 255, 255, 0.19)',
-                    fontWeight: 600,
-                    fontSize: 22,
-                    lineHeight: 30,
-                    color: '#FFFFFF',
-                    textAlign: 'center',
-                    }}>
-                    {route.params.content}
-                </Text>
+            <View style={{
+                padding: 21,
+                zIndex: 9999
+            }}>
+                <LinearGradient colors={['#FF9457', '#E96114']} {...deg(111.39)} style={{borderRadius: 12}}>
+                {/* Contaibner */}
+                    <View style={{
+                        paddingRight: 21,
+                        paddingLeft: 21,
+                        paddingTop: 56,
+                        paddingBottom: 56,
+                }}>
+                        <Text
+                            style={{
+                                // fontWeight: '600',
+                                fontSize: 22,
+                                lineHeight: 30,
+                                color: '#FFFFFF',
+                                textAlign: 'center',
+                            }}
+                        >
+                                {route.params.content}
+                            </Text>
+                    </View>
+                </LinearGradient>
             </View>
         </Animated.View>
     )
@@ -71,7 +81,7 @@ const BroadcastScreen: FunctionComponent = ({ navigation }) => {
 
 
     return (
-          <View style={{ backgroundColor: '#000000', flex: 1 }}>
+        <View style={{ backgroundColor: '#000000', flex: 1, marginTop: 70 }}>
                 <PostContent fadeOut={fadeOut} navigation={navigation} />
                 <BroadcastForm navigation={navigation}/>
           </View>

@@ -23,7 +23,7 @@ export default function App() {
   return (
     <Provider store={Store}>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{animation: 'none'}}>
           <Stack.Screen
               name="Dashboard"
               component={Dashboard}
@@ -68,6 +68,7 @@ export default function App() {
               options={
                 {
                   headerShown: false,
+                  // header: () => <Profile />,
                 }
               }
           />

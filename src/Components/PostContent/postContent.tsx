@@ -1,6 +1,8 @@
 import React, { Component, useState, useEffect } from 'react';
 import { View, StyleSheet, Animated, Image, Text} from 'react-native'
 import { useRoute } from '@react-navigation/native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { deg } from 'react-native-linear-gradient-degree';
 
 export default function PostContent({navigation, fadeOut}) {
 
@@ -9,7 +11,7 @@ export default function PostContent({navigation, fadeOut}) {
 
     // Text Animation Function
     useEffect(() => {
-        Animated.timing(offset, { toValue: 0, duration: 1500 }).start();
+        Animated.timing(offset, { toValue: 0, duration: 1500 , useNativeDriver: true }).start();
     })
 
     return (
@@ -17,17 +19,13 @@ export default function PostContent({navigation, fadeOut}) {
         <View style={{
             padding: 21,
         }}>
+            <LinearGradient colors={['#FF9457', '#E96114']} {...deg(111.39)} style={{borderRadius: 12}}>
             {/* Contaibner */}
                 <View style={{
-                background: 'linear-gradient(111.39deg, #FF9457 -7.95%, #E96114 64.07%)',
-                paddingRight: 21,
-                paddingLeft: 21,
-                paddingTop: 56,
-                paddingBottom: 56,
-                marginBottom: 27,
-                borderRadius: 12,
-                border: 'border: 1px solid rgba(255, 255, 255, 0.19)',
-
+                    paddingRight: 21,
+                    paddingLeft: 21,
+                    paddingTop: 56,
+                    paddingBottom: 56,
             }}>
                 {/* Text Animation */}
                     <Animated.View
@@ -49,7 +47,7 @@ export default function PostContent({navigation, fadeOut}) {
                     }}>
                     <Text
                         style={{
-                            fontWeight: 600,
+                            // fontWeight: 'bold',
                             fontSize: 22,
                             lineHeight: 30,
                             color: '#FFFFFF',
@@ -60,6 +58,7 @@ export default function PostContent({navigation, fadeOut}) {
                         </Text>
                     </Animated.View>
                 </View>
+            </LinearGradient>
         </View>
     )
 }

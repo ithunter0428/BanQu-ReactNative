@@ -10,16 +10,13 @@ export default function Search({ onChangeKeyword }) {
     return (
         <View style={styles.container}>
             {/* search Icon */}
-            <Feather
-                name="search"
-                size={20}
-                color="white"
-                style={{ marginLeft: 1 }}
-            />
+            <Image
+            style={styles.icon_search}
+            source={require('../../../../assets/search.png')} />
             {/* Input field */}
 
             <TextInput
-                style={[styles.input, {outline: 'none'}]}
+                style={[styles.input, ]}
                 value={key}
                 onChangeText={(text) => {
                   setKey(text)
@@ -27,6 +24,7 @@ export default function Search({ onChangeKeyword }) {
                   }
                 }
                 placeholder="Search"
+                placeholderTextColor="rgba(255,255,255,0.4)" 
           />
         
           <Image
@@ -49,18 +47,26 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255,255,255,0.1)',
     height: 54,
     borderRadius: 12,
-    padding: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
 
   mic: {
     width: 15,
     height: 20,
   },
+
+  icon_search: {
+    width: 24,
+    height: 24,
+  },
  
   input: {
     fontSize: 20,
     marginLeft: 10,
-    width: '98%',
+    // width: '92%',
+    flexDirection: 'row',
+    flex: 1,
     color: '#FFFFFF',
   },
 });
